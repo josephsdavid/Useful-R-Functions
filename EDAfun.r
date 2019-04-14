@@ -117,6 +117,7 @@ pairfun <- function(df){
 # you can tweak the heat map if you like!
 # requirements
 library(RColorBrewer)
+library(gplots)
 
 
 heatmapper <- function(df){
@@ -135,7 +136,8 @@ heatmapper <- function(df){
 # exec(df, useless, heatmapper)
 
 # correlation
-
+# requires:
+library(corrplot) 
 
 
 correlator  <-  function(df){
