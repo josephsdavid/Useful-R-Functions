@@ -59,7 +59,7 @@ singleResponse  <-  function(df){
 	# expl  <- names(df)[2:ncol(df)]
 	varList <- list("response" = response, "expl" = expl)
 	return(varList)
-
+}
 
 
 scatterfun  <- function(df,x,y){
@@ -172,6 +172,7 @@ covariator <- function(df){
 # total variance
 
 
+
 variator  <- function(df) {
 	df %>%
 		keep(is.numeric) %>%
@@ -179,9 +180,6 @@ variator  <- function(df) {
 		cov %>% diag %>% sum
 } 
 
+
 # usage
 # exec(df, useless, variator) 
-
-
-
-
