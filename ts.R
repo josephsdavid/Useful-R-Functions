@@ -56,3 +56,16 @@ vxbar  <- function(vec){
 # brate = read.csv("../../Data/10_year_bond_rate_2010-2015.csv")
 # x <- brate$Adj.Close
 # vxbar(x)
+
+# vxbarci 
+# returns a lovely confidence interval on vxbar
+# requires vxbar and all its dependencies
+
+vxbarci  <- function(vec){
+	rhs  <- 1.96*sqrt(vxbar(vec))
+	lhs  <- mean(x)
+	return(c(lhs-rhs, lhs+rhs))
+}
+
+# Example
+# vxbarci(x)
