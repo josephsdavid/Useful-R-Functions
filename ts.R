@@ -10,6 +10,6 @@ tplot  <- function(vec, begin, end){
 
 # usage:
 
-# 1Realization1 = gen.arma.wge(n = 250)
+# Realization1 = gen.arma.wge(n = 250)
 #
 # tplot(Realization1, 1, 250)
