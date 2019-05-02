@@ -23,6 +23,7 @@ splitacf = function(vec){
 	acf(vec)
 	acf(vec[1:(length(vec)/2)])
 	acf(vec[(length(vec)/2):length(vec)])
+	par(mfrow = c(1,1))
 }
 
 # Realize = gen.arma.wge(500,0.95,0,plot = T, sn = 784)
