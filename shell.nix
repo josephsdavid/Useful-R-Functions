@@ -1,12 +1,11 @@
- let
-   pkgs = import <nixpkgs> {}; 
-   stdenv = pkgs.stdenv;
- in with pkgs; {
-   myProject = stdenv.mkDerivation {
-     name = "handyR";
-     version = "2";
-     buildInputs =  [
-       R
+let
+    pkgs = import <nixpkgs> {};
+in
+  pkgs.mkShell {
+    name = "handyR";
+    buildInputs = with pkgs; [
+      R
+      rPackages.tidyverse
       rPackages.cowplot
       rPackages.dplyr
       rPackages.tidyr
@@ -14,8 +13,8 @@
       rPackages.RColorBrewer
       rPackages.ggplot2
       rPackages.gplots
-      rPackages.corrpot
+      rPackages.corrplot
       rPackages.plyr
     ];
-  };
-}
+    
+  }

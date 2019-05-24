@@ -31,7 +31,7 @@ splitacf = function(vec){
 
 # vxbar: variance of a stationary time series where autocorrelation approaches zero (from section 1.9) 
 # requires:
-
+# NUMERIC variables
 library(purrr)
 library(dplyr)
 
