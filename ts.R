@@ -69,3 +69,23 @@ vxbarci  <- function(vec){
 
 # Example
 # vxbarci(x)
+
+# difference1
+# takes the first difference of an arima model
+
+# requires:
+library(tidyverse)
+# library magrittr
+library(tswge)
+
+diff1 <- . %>% artrans.wge(phi.tr = 1) 
+
+# Superdiff
+
+library(tswge)
+library(tidyverse)
+
+differ <- function(x, n){
+	f  <- . %>% artrans.wge(phi.tr = c(rep(0,n-1),1))
+	f(x)
+}
