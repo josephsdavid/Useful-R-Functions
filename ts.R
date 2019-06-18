@@ -89,3 +89,79 @@ differ <- function(x, n){
 	f  <- . %>% artrans.wge(phi.tr = c(rep(0,n-1),1))
 	f(x)
 }
+
+
+## Tswge generator wrapper
+## generates tswge data with a convenient wrapper
+
+
+library(tswge)
+
+tswgen <- function(n,sn=0){
+	sig <- function(...){
+		gen.sigplusnoise.wge(n=n,...,sn=sn)
+	}
+	ari <- function(...,dif){
+		gen.arima.wge(n=n,...,sn=sn)
+	}
+	aru <- function(...){
+		gen.aruma.wge(n=n,..., sn=sn)
+	}
+	list("sig"=sig,"ari"=ari,"aru"=aru)
+}
+
+# ts200 <- tswgen(200)
+# ts200$sig(phi = c (0.2,0.4,-0.2))
+# ts200$ari(d = 4)
+# ts200$aru(s=1)
+# 
+# ts200_37 <- tswgen(200,sn=2)
+# ts200_37$sig(phi = c (0.2,0.4,-0.2))
+# ts200_37$ari(d = 4)
+# ts200_37$aru(s=1)
+
+
+# AR1 Forecast generator:
+# requires: nothing
+# makes a forecasting function given mu and sigma
+
+ar1forcastgen <- function(phi,mu){
+	fun <- function(xprev,l=1){
+		if (l==1)	return(phi*xprev + mu*(1-phi))
+		else		return(phi*fun(xprev,l-1) + mu*(1-phi))
+	}
+	fun
+}
+
+
+# usage
+# 
+# ex74 <- ar1forcastgen(phi=.8, mu = 24.17)
+# times <- c(1,2,3,4,5)
+# lapply(times, ex74, xprev = 22.93) %>% as.data.frame
+# ex74(22.93,n=2)
+#
+#
+#
+
+
+# AR(p) forecasting function
+# requires: nothing
+# returns a vector of forcasted (AR(p)) values
+
+arpgen <- function(phi,vec,l,mu){
+	v <- vec[length(vec):(length(vec)-(length(phi)-1))]
+	f <- sum(phi*(v)) + mu*(1-sum((phi)))
+		if (l==1)	return(f)
+	 		return(arpgen(phi,append(vec,f),l-1,mu))
+
+}
+
+arp <- function(phi,vec,l,mu){
+	as.numeric(lapply(1:l, arpgen, phi = phi, vec = vec, mu = mu))
+}
+## usage
+# x <- c(27.7,23.4,21.2,21.1,22.7)
+# p <- c(1.6,-.8)
+# avg <- 29.4
+# arp(p,x,5,avg)
